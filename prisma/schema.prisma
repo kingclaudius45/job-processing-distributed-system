@@ -1,0 +1,47 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum JobStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+
+  jobs Job[]
+}
+
+
+model JobLog {
+  id        String   @id @default(uuid())
+  jobId     String
+  message   String
+  createdAt DateTime @default(now())
+
+  job Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+}
+
+
+model Job {
+  id        String    @id @default(uuid())
+  task      String
+  status    JobStatus @default(PENDING)
+  createdAt DateTime  @default(now())
+
+  userId String?
+  user   User? @relation(fields: [userId], references: [id])
+
+  logs JobLog[]
+}
+
