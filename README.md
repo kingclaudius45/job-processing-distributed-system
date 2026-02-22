@@ -116,6 +116,6 @@ Integrate monitoring dashboards (Grafana)
 
 Swagger UI available at:
 
-https://job-processing-distributed-system-production.up.railway.app//api
+https://job-processing-distributed-system-production.up.railway.app/api
 
 Use JWT token to authorize protected endpoints.
