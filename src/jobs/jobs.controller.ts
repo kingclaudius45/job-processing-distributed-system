@@ -8,7 +8,11 @@ import { Query } from '@nestjs/common';
 import { JobStatus } from '@prisma/client';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiResponse } from '@nestjs/swagger';
 
+@ApiTags('Jobs')
+@ApiBearerAuth() // 🔥 tells Swagger this needs JWT
 @UseGuards(JwtAuthGuard)
 @Controller('jobs')
 export class JobsController {
@@ -19,6 +23,7 @@ export class JobsController {
     return await this.jobsService.createJob(dto);
   }
 
+  @ApiResponse({ status: 200, description: 'Get all jobs' })
   @Get()
   async getAllJobs(@Query('status') status?: JobStatus) {
     return await this.jobsService.getAllJobs(status);
