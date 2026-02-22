@@ -111,3 +111,11 @@ Dockerize the system
 Add role-based access (RBAC)
 Add pagination & filtering
 Integrate monitoring dashboards (Grafana)
+
+## 📘 API Documentation
+
+Swagger UI available at:
+
+https://job-processing-distributed-system-production.up.railway.app//api
+
+Use JWT token to authorize protected endpoints.
